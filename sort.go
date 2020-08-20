@@ -78,6 +78,7 @@ func (sort *Sort) Sort(data Interface) {
 			wg.Wait()
 			if heap.Len() == 1 {
 				close(semaphore)
+				heap.Close()
 				break
 			}
 		}
