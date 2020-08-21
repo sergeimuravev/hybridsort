@@ -7,7 +7,7 @@ The procedure works in a few steps:
 - find pre-sorted chunks (called 'run') of size [MinRunSize, MaxRunSize] and run insertion sort in parallel
 - push results into priority queue to restore sequence of runs
 - fetch runs from priority queue and perform symmerge in parallel
-- push back merged results into priority queue util the only one run found in the queue
+- push back merged results into priority queue until the only one run found in the queue
 
 
 
