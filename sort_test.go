@@ -49,7 +49,7 @@ func createSortedTestSet(n int) hybridsort.Interface {
 // Benchmark helpers
 func benchmarkHybridSort(b *testing.B, n int, random bool) {
 	s := hybridsort.Sort{}.
-		WithMinRunSize(32).
+		WithMinRunSize(128).
 		WithMaxRunSize(255).
 		WithDegreeOfParallelism(8)
 

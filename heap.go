@@ -63,24 +63,9 @@ func (h *heap) Push(x run) {
 	atomic.AddInt32(&h.count, 1)
 }
 
-func (h *heap) PushTwo(x, y run) {
-	h.in <- x
-	h.in <- y
-	atomic.AddInt32(&h.count, 2)
-}
-
 func (h *heap) Pop() run {
 	h.outReq <- true
 	r := <-h.out
 	atomic.AddInt32(&h.count, -1)
 	return r
-}
-
-func (h *heap) PopTwo() (run, run) {
-	h.outReq <- true
-	x := <-h.out
-	h.outReq <- true
-	y := <-h.out
-	atomic.AddInt32(&h.count, -2)
-	return x, y
 }
