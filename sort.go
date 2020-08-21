@@ -51,12 +51,13 @@ func (sort *Sort) Sort(data Interface) {
 	for {
 		len = heap.Len()
 		if len > 1 {
-			var x, y run = heap.PopTwo()
+			var x, y run = heap.Pop(), heap.Pop()
 			if y.Start-x.End != 1 {
 				// Stop and replay non-contiguous runs
 				wg.Wait()
 				x.Seq++
-				heap.PushTwo(x, y)
+				heap.Push(x)
+				heap.Push(y)
 				continue
 			}
 
@@ -78,6 +79,7 @@ func (sort *Sort) Sort(data Interface) {
 			wg.Wait()
 			if heap.Len() == 1 {
 				close(semaphore)
+				heap.Close()
 				break
 			}
 		}
