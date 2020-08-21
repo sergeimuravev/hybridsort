@@ -2,13 +2,11 @@ package hybridsort
 
 import (
 	_heap "container/heap"
-	"sync"
 	"sync/atomic"
 )
 
 // heap is a primitive thread-safe binary heap wrapper
 type heap struct {
-	mux    sync.Mutex
 	buff   heapBuffer
 	count  int32
 	in     chan run
@@ -20,7 +18,7 @@ type heap struct {
 func makeHeap() *heap {
 	h := heap{
 		in:     make(chan run, 1),
-		out:    make(chan run, 2),
+		out:    make(chan run, 1),
 		outReq: make(chan bool),
 		done:   make(chan bool),
 	}
